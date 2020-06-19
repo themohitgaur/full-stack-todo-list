@@ -1,0 +1,486 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My Todo Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caladea&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    
+        }
+        #navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: transparent;
+            color: white;
+            
+        }
+        .search {
+            display: flex;
+        }
+        .search input[type=text] {
+                padding: 6px;
+                width: 414px;
+                margin-top: 8px;
+                font-size: 17px;
+                border: 1px solid black;
+        }
+
+        .submit button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            
+        }
+        .search button:hover {
+            background: #ccc;
+
+        }
+
+        #logo {
+            width: 150px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 900;
+            margin-top: 10px;
+            margin-bottom: 10px;
+             background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+
+        }
+
+         #linkscontainer {
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            }
+        #home {
+             background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+
+        }
+        #tasks {
+    border-radius: 30px;
+            
+            background: linear-gradient(to right, #ff105f,#ffad06);
+        }
+        #about {
+             background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+            
+            }
+
+        .link {
+            text-decoration: none;
+            color: white;
+            font-size: large;
+            }
+        #single {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 5px;
+            transition: 0.3s all;
+            padding: 5px;
+            border-radius: 8px;
+                border: groove;
+                    background: azure;
+                    margin-top: 25px;
+        }    
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            TEXT-ALIGN: LEFT;
+        }
+        .todo-item {
+            width:500px;
+            background-color:azure;
+            margin:7px;
+            box-shadow: 2px 2px 2px rgba(0,0,0,0, .3);
+            transition: .3 all;
+            padding:15px;
+            align-items:center;
+        }
+        .todo-item:hover {
+             padding: 30px;
+             box-shadow: 2px 2px 8px rgba(0,0,0,0, .3);
+         }
+        .task-title {
+             font-weight:bold;
+             font-size:22px;
+         }
+        .taks-description {
+             margin-top:4px;
+             margin-bottom:4px;
+         }
+        .task-deadline {
+             font-size:12px;
+
+         }
+        .add-button {
+            margin: 10px;
+            width: 400px;
+            border: 0;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            ALIGN-SELF: CENTER;
+             background: linear-gradient(to right, #ff105f,#ffad06);
+        }
+        .add-button:hover {
+         
+            cursor: pointer;
+        }
+        .container{
+         height: 100%;
+         width: 100%;
+        background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(cant.jpg);
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+} 
+        .new-item-form {
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 4px;
+            position: relative;
+            margin: 8% auto;
+            padding: 5px;
+            background: #fff;
+        }
+        input {
+            margin:5px;
+            padding:12px;
+            border: 1px solid black;
+            border-radius: 4px;
+            
+        }
+         #links {
+            margin-top: 5px;
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration:none;
+            border: inset;
+                    }
+        .eb{
+            background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+            
+            text-decoration: none;
+        }
+        .deb {
+            background: linear-gradient(to right, #ff105f,#ffad06);
+    border-radius: 30px;
+            
+            text-decoration: none;
+            
+        }
+        .comb {
+            background: linear-gradient(to right, #ff105f,#ffad06);
+            text-decoration: none;
+    border-radius: 30px;
+            
+        }
+        .dropbtn {
+             background: linear-gradient(to right, #ff105f,#ffad06);
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+    border-radius: 30px;
+
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color:white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            }
+            #change {
+            margin: 10px;
+            width: 400px;
+            border: 0;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            ALIGN-SELF: CENTER;
+            }
+            #edittask {
+                 margin: 10px;
+            width: 400px;
+            border: 0;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            ALIGN-SELF: CENTER;
+             background: linear-gradient(to right, #ff105f,#ffad06);
+            }
+            
+
+        .dropdown-content a:hover {background-color: rgb(245, 245, 245);;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color:rgb(239, 243, 243);}
+
+
+    </style>
+</head>
+<body>
+     <div id="navbar">
+        <div id="logo">
+            Todo
+        </div>
+        <div class="search">
+            <form method="GET">
+                <input type="text" placeholder="search.." id="searchbox">
+                <button type="submit" id="submitbutton"> <i class="fa fa-search"></i></button>
+           
+            </form>
+        </div>
+        <div id="linkscontainer">
+            <div><a href="#" id="home" class="link">Home</a></div>
+            <div><a href="#" id="tasks" class="link">Task</a></div>
+            <div><a href="#" id="about" class="link">About</a></div>
+        </div>
+    <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i>Settings</button>
+        <div class="dropdown-content">
+            <a href="#">My Account</a>
+            <a href="#">Terms</a>
+            <a href="#">Settings</a>
+            <a href="#" id="logoutbuttn">logout</a>
+            
+        </div>
+    </div>
+    </div>
+    
+    
+    <div class="container">
+    <div id="todoListElement" class="todo-list">
+    </div>
+   
+    <form class="new-item-form">
+        <h4 id="un"></h4>
+        
+        <h2>Add New Task</h2>
+        <input id="taskTitleInput" type="text" placeholder="Task Title">
+        <input id="taskDescriptionInput" type="text" placeholder="Description">
+        <input id="taskDeadlineInput" type="date" placeholder="Task Deadline">
+        <div id="change" style="width:445px; position: relative;
+         margin: 1% auto;
+         background: #fff;
+         padding: 5px;">
+        <button class="add-button" id="addtask">Add Task</button>
+    </div>
+    </div>
+    </form>
+    
+    <script>
+        var todoListElement = document.getElementById("todoListElement");
+        var taskTitleInputElement = document.getElementById("taskTitleInput");
+        var taskDescriptionInputElement = document.getElementById("taskDescriptionInput");
+        var taskDeadlineInputElement = document.getElementById("taskDeadlineInput");
+        var searchs = document.getElementById('searchbox');
+        var submitbuttons = document.getElementById('submitbutton');
+        var logout = document.getElementById('logoutbuttn');
+         addtask.addEventListener('click',function(e) {
+             e.preventDefault();
+            var Title = taskTitleInputElement.value;
+            var Description = taskDescriptionInputElement.value;
+            var Deadline = taskDeadlineInputElement.value;
+            var rawurl = "http://localhost:8081" + "/addtask/" + "?Title=" + Title + "&Description=" + Description + "&Deadline=" + Deadline;
+            var url = rawurl;
+            var promisedresponse = fetch(url);
+             promisedresponse.then(response => {
+                 if (response.status == 200) {
+                     var promiseddata = response.json();
+                     promiseddata.then(serverdata => {
+                         var datafromserver = serverdata;
+                         data = datafromserver;
+                         taskTitleInputElement.value = "";
+                         taskDescriptionInputElement.value = "";
+                         taskDeadlineInputElement.value = "";
+                         renderlist();
+                         if (datafromserver == "exists") {
+                             var unauth = document.getElementById('un');
+                             unauth.innerHTML = 'Task already exists';
+                         }
+                         else if (datafromserver == "true") {
+                             var unauth = document.getElementById('un');
+                             unauth.innerHTML = 'Task Added Successfully';
+                         }
+                                         });
+            }
+
+         });
+        });
+        submitbuttons.addEventListener('click', function (e) {
+                e.preventDefault();
+                var search = searchs.value;
+                var rawurl = "http://localhost:8081/search/?Title=" + search;
+                var url = rawurl;
+                var promisedresponse = fetch(url);
+                promisedresponse.then(response => {
+                    if (response.status == 200) {
+                        var promiseddata = response.json();
+                        promiseddata.then(serverdata => {
+                            var datafromserver = serverdata;
+                            data = datafromserver;
+                            renderlist();
+                        });
+                    }
+                });
+
+
+            });
+            //logout
+            logout.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.location.href = 'login.html';
+            });
+             function editit(i) {
+                    var change = document.getElementById('change');
+                    change.innerHTML = '<button class="textboxes" id="edittask">Edit Task</button><br>';
+                    var promisedresponse = fetch(url);
+                    Title = data[i].Title;
+                    taskTitleInputElement.value = data[i].Title;
+                    taskDescriptionInputElement.value = data[i].Description;
+                    taskDeadlineInputElement.value = data[i].Deadline;
+                    var edittask = document.getElementById('edittask');
+                    edittask.addEventListener('click', function (e) { 
+                        e.preventDefault();
+                        var change = document.getElementById('change');
+                        change.innerHTML = '<button class="textboxes" id="addtask">Add Task</button><br>';
+                        var rawurl = "http://localhost:8081" + "/edittask/" + "?Title=" + taskTitleInputElement.value + "&Description=" + taskDescriptionInputElement.value + "&Deadline=" + taskDeadlineInputElement.value + "&beforeedit=" + Title;
+                        var url = rawurl;
+                        var promisedresponse = fetch(url);
+                        promisedresponse.then(response => {
+                            if (response.status == 200) {
+                                var promiseddata = response.json();
+                                promiseddata.then(serverdata => {
+                                    var datafromserver = serverdata;
+                                    data = datafromserver;
+                                    renderlist();
+
+                                });
+                            }
+                        });
+                    });
+                }
+                function deleteit(i) {
+                        Title = data[i].Title;
+                        var rawurl = "http://localhost:8081" + "/deletetask/" + "?Title=" + Title;
+                        var url = rawurl;
+                        var promisedresponse = fetch(url);
+                        promisedresponse.then(response => {
+                            if (response.status == 200) {
+                                var promiseddata = response.json();
+                                promiseddata.then(serverdata => {
+                                    var datafromserver = serverdata;
+                                    data = datafromserver;
+                                    renderlist();
+                                });
+                            }
+                        });
+                    }
+                    function completeit(i) {
+                        Title = data[i].Title;
+                        Description = data[i].Description;
+                        Deadline = data[i].Deadline;
+                        var rawurl = "http://localhost:8081" + "/completetask/" + "?Title=" + Title + "&Description=" + Description + "&Deadline=" + Deadline;
+                        var url = rawurl;
+                        var promisedresponse = fetch(url);
+                        promisedresponse.then(response => {
+                            if (response.status == 200) {
+                                var promiseddata = response.json();
+                                promiseddata.then(serverdata => {
+                                    var datafromserver = serverdata;
+                                    data = datafromserver;
+                                    renderlist();
+                                });
+                            }
+                        });
+                    }
+                    //see task
+                    var todoitems = document.getElementById('todoListElement');
+                    var data = [];
+                    var rawurl = "http://localhost:8081" + "/seetask";
+                    var url = rawurl;
+                    var promisedresponse = fetch(url);
+                    promisedresponse.then(response => {
+                        if (response.status == 200) {
+                            var promiseddata = response.json();
+                            promiseddata.then(serverdata => {
+                                var datafromserver = serverdata;
+                                data = datafromserver;
+                                renderlist();
+                                console.log(datafromserver);
+                            });
+                        }
+                    });
+                    function renderlist() {
+                        var res = "";
+                       
+                        for (var i = 0; i < data.length; i++) {
+                            var html = '\
+        <div id="single">\
+        <div id="task">\
+            <div id="taskTitleInput" style="margin-bottom:5px;;">'+ data[i].Title + '</div>\
+            <div id="taskDescriptionInput" style="margin-bottom:5px;">'+ data[i].Description + '</div>\
+            <div id="taskDeadlineInput" >'+ data[i].Deadlinee + '</div>\
+        </div>\
+        <div id="links">\
+            <div><a href="#" id="edit-button" class="eb" onclick=editit('+ i + ')>Edit</a></div>\
+            <div><a href="#" id="delete-button" class="deb" onclick=deleteit('+ i + ')>Delete</a></div>\
+            <div><a href="#" id="complete-button" class="comb" onclick=completeit('+ i + ')>MarkAsComplete</a></div>\
+        </div>\
+    </div>';
+                            res += html;
+                        }
+                        todoitems.innerHTML = res;
+                    };
+                    renderlist();
+            
+    </script>
+
+</body>  
+</html>++

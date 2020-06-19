@@ -1,0 +1,118 @@
+<html>
+
+<head>
+    <title> Signup Form</title>
+
+ <link rel="stylesheet" type="text/css" href="style.css">
+
+</head> 
+<body>
+    <div class="container">
+
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="signup()">Sign Up</button>
+            </div>
+            <div class="social-icons">
+                <img src="fb.png">
+                <img src="tw.png">
+                <img src="gp.png">
+            </div>
+            
+            <form id="login" class="input-group" method="post">
+                <h4 id="un"></h4>
+                <input class="box" 
+                type="text" 
+                name="name"
+                id="name"
+                placeholder="UserName" required/><br>                
+                <input class="box" type="password" name="Password" id="Password" placeholder="Password" required /><br>
+                <br>
+                <input class="checkbox" type="checkbox"><span>Remember Password</span> 
+                <button type="submit" name="submit" class="submit" value="submit" id="loginsub" >Log In</button><br>
+    </form>
+    <form id="signup" class="input-group" method="post">
+
+        <h4 id="una"></h4>
+        <input class="box" type="text" name="name" id="signname" placeholder="UserName" required /><br>
+        <input class="box" type="email" name="Email" id="email" placeholder="Email ID" required /><br>
+        <input class="box" type="password" name="Password" id="signPassword" placeholder="Password" required /><br>
+        <input class="box" type="text" name="phone" id="phone" placeholder="Phone No" required /><br>
+        <br>
+        <input class="checkbox" type="checkbox"><span>I agree to the terms and conditions</span>
+        <button type="submit" name="submit" class="submit" value="submit" id="signsub"/>Sign Up</button><br>
+    </form> 
+    </div>
+    <script type="text/javascript" src="signup.js"></script>
+    <script>
+       
+        var user = document.getElementById('name');
+        var signuser = document.getElementById('signname');
+        var pass = document.getElementById('Password');
+        var signpass = document.getElementById('signPassword');
+        var loginsub = document.getElementById('loginsub');
+        var signsub = document.getElementById('signsub');
+        var Phone = document.getElementById('phone');
+        var Email = document.getElementById('email');
+        signsub.addEventListener('click', function (e) {
+                e.preventDefault();
+                var username=signuser.value;
+                var password=signpass.value;
+                var email=Email.value;
+                var phone=Phone.value;
+                var url="http://localhost:8081"+"/signup/"+"?"+"username="+username+"&email="+email +"&password="+password+"&phone="+phone;
+                var newurl=url;
+                var promisedresponse=fetch(newurl);
+                promisedresponse.then(response=>{
+                    if(response.status==200){
+                        var promiseddata=response.json();
+                        promiseddata.then(serverdata=>{
+                        var datafromserver=serverdata;
+                        console.log(datafromserver);
+                if(datafromserver=="true"){
+                    var unauth=document.getElementById('una');
+                    unauth.innerHTML='signup successfully';
+                    window.location.href='login.html';
+                }
+                else if (datafromserver=="exist"){
+                    var unauth=document.getElementById('un');
+                    unauth.innerHTML='User already Exist';
+                }
+                    })
+                }
+                });
+            }); 
+             loginsub.addEventListener('click', function (e) {          
+                e.preventDefault();
+                var username=user.value;
+                var password=pass.value;
+                var url="http://localhost:8081"+"/login/"+"?"+"username="+username +"&password="+password;
+                var newurl=url;
+                var promisedresponse=fetch(newurl);
+                promisedresponse.then(response=>{
+                    if(response.status==200){
+                        var promiseddata=response.json();
+                        promiseddata.then(serverdata=>{
+                        var datafromserver=serverdata;
+                        console.log(datafromserver);
+                if(datafromserver=="true"){
+                    var unauth=document.getElementById('un');
+
+                    unauth.innerHTML='login successfully';
+                    window.location.href='index.html';
+                }
+                else{
+                    var unauth=document.getElementById('un');
+                    unauth.innerHTML='login unsuccessful';
+                }
+                    })
+                }
+                });
+            });  
+            
+            
+    </script>
+</body>
+</html>
